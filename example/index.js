@@ -1,7 +1,7 @@
-const { App } = require('@tinyhttp/app')
-const { addToDocs, generateDocs } = require('swagger')
-const { writeFileSync } = require('fs')
-const stringify = require('json-format')
+import { App } from '@tinyhttp/app'
+import { addToDocs, generateDocs } from 'swagger'
+import { writeFileSync } from 'fs'
+import stringify from 'json-format'
 
 const schema = {
   id: { type: 'number', positive: true, integer: true },
