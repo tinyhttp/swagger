@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function createBodySub(schema, contentType = 'application/json') {
     if (!schema || Object.keys(schema).length == 0)
         return {};
@@ -113,4 +117,5 @@ function generateDocs(app) {
     return docs;
 }
 
-export { addToDocs, generateDocs };
+exports.addToDocs = addToDocs;
+exports.generateDocs = generateDocs;
