@@ -72,28 +72,27 @@ function bodyToOpenAPI(schema: body) {
     )['optional']
   })
 
-  const properties = names.map(n => {
+  const properties = {}
+  names.forEach(n => {
     if (typeof schema[n] == 'string') {
-      const tmp: { [_: string]: { type: string } } = {}
-      tmp[n] = { type: schema[n] as string }
-      return tmp
-    }
-
-    if ((schema[n] as { type: string; [_: string]: any })['type'] == 'array') {
-      const tmp: { [_: string]: { type: string; items: { type: string } } } = {}
-      tmp[n] = {
+      properties[n] = { type: schema[n] as string }
+    } else if (
+      (schema[n] as { type: string; [_: string]: any })['type'] == 'array'
+    ) {
+      properties[n] = {
         type: 'array',
         items: { type: (schema[n] as { items: string })['items'] },
       }
-      return tmp
+    } else {
+      properties[n] = { type: (schema[n] as { type: string })['type'] }
     }
-
-    const tmp: { [_: string]: { type: string } } = {}
-    tmp[n] = { type: (schema[n] as { type: string })['type'] }
-    return tmp
   })
 
-  return { type: 'object', required, properties }
+  return {
+    type: 'object',
+    required,
+    properties,
+  }
 }
 
 function schemaToOpenAPI(schema: schema, origin: origin): any[] {

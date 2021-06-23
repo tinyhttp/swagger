@@ -1,5 +1,5 @@
 import { App } from '@tinyhttp/app'
-import { addToDocs, generateDocs } from 'swagger'
+import { addToDocs, generateDocs } from '../dist/index.cjs'
 import { writeFileSync } from 'fs'
 import stringify from 'json-format'
 
@@ -11,17 +11,26 @@ const schema = {
 
 const app = new App()
 
-app.post(
-  '/',
-  addToDocs({
-    headers: { authorization: 'string' },
-    params: { docId: 'number' },
-    body: schema,
-  }),
-  (req, res) => {
+app
+  .get('/:docId', addToDocs({ params: { docId: 'number' } }), (req, res) => {
     res.status(200).send('done')
-  }
-)
+  })
+  .post(
+    '/:docId',
+    addToDocs(
+      {
+        headers: { authorization: 'string' },
+        params: { docId: 'number' },
+        body: schema,
+      },
+      ['docs']
+    ),
+    (req, res) => {
+      res.status(200).send('done')
+    }
+  )
 
-writeFileSync('docs.json', stringify(generateDocs(app)), { encoding: 'utf-8' })
+writeFileSync('docs.json', stringify(generateDocs(app, { title: 'example' })), {
+  encoding: 'utf-8',
+})
 // app.listen(3000)
