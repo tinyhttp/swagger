@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         "target": "ES2019",
-        "module": "commonjs",
+        "module": "ESNext",
         "declaration": true,
+        "declarationDir": "dist",
         "preserveSymlinks": true,
         "outDir": "dist",
         "isolatedModules": true,

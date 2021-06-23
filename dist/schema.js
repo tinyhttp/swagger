@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createParameterSubs = exports.createBodySub = void 0;
-function createBodySub(schema, contentType = 'application/json') {
+export function createBodySub(schema, contentType = 'application/json') {
     if (!schema || Object.keys(schema).length == 0)
         return {};
     const content = {};
@@ -11,8 +8,7 @@ function createBodySub(schema, contentType = 'application/json') {
         content,
     };
 }
-exports.createBodySub = createBodySub;
-function createParameterSubs(parameters) {
+export function createParameterSubs(parameters) {
     const query = parameters.query;
     const params = parameters.params;
     const headers = parameters.headers;
@@ -27,7 +23,6 @@ function createParameterSubs(parameters) {
         headerSubs = schemaToOpenAPI(headers, 'header');
     return [...querySubs, ...paramSubs, ...headerSubs];
 }
-exports.createParameterSubs = createParameterSubs;
 function bodyToOpenAPI(schema) {
     const names = Object.keys(schema);
     const required = names.filter(n => {

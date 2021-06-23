@@ -1,16 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateDocs = exports.addToDocs = void 0;
-const schema_1 = require("./schema");
-function addToDocs(schema) {
+import { createBodySub, createParameterSubs } from './schema';
+export function addToDocs(schema) {
     const mw = async (_req, _res, next) => {
         next();
     };
     mw.schema = schema;
     return mw;
 }
-exports.addToDocs = addToDocs;
-function generateDocs(app) {
+export function generateDocs(app) {
     const routes = app.middleware
         .filter(mw => mw.type == 'route' && mw.handler.schema)
         .map(route => {
@@ -29,12 +25,12 @@ function generateDocs(app) {
             const tmp = {};
             tmp[path] = {};
             tmp[path][route.method.toLowerCase()] = {
-                parameters: schema_1.createParameterSubs({
+                parameters: createParameterSubs({
                     headers: route.schema.headers,
                     params: route.schema.params,
                     query: route.schema.query,
                 }),
-                requestBody: schema_1.createBodySub(route.schema.body),
+                requestBody: createBodySub(route.schema.body),
             };
             return tmp;
         });
@@ -42,4 +38,3 @@ function generateDocs(app) {
     });
     return docs;
 }
-exports.generateDocs = generateDocs;
