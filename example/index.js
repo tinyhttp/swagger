@@ -31,7 +31,16 @@ app
   )
   .get(
     '/users',
-    addToDocs({ query: { userId: 'number' } }, ['users']),
+    addToDocs({ query: { userId: { type: 'number', optional: true } } }, [
+      'users',
+    ]),
+    (req, res) => {
+      res.status(200).send('done')
+    }
+  )
+  .get(
+    '/:userId/:docId',
+    addToDocs({ params: { userId: 'number', docId: 'number' } }),
     (req, res) => {
       res.status(200).send('done')
     }
