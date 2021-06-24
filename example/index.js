@@ -29,6 +29,13 @@ app
       res.status(200).send('done')
     }
   )
+  .get(
+    '/users',
+    addToDocs({ query: { userId: 'number' } }, ['users']),
+    (req, res) => {
+      res.status(200).send('done')
+    }
+  )
 
 writeFileSync('docs.json', stringify(generateDocs(app, { title: 'example' })), {
   encoding: 'utf-8',
