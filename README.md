@@ -1,8 +1,9 @@
-# @tinyhttp/swagger
+<div align="center">
+  <img src="logo.svg" width="200px" alt="@tinyhttp/swagger" />
+</div>
+<br />
 
-![](logo.svg)
-
-Swagger integration for tinyhttp
+[Swagger](https://swagger.io/) integration for tinyhttp.
 
 ## Install
 
