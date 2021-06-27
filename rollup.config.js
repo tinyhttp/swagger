@@ -5,5 +5,5 @@ export default {
   input: 'src/index.ts',
   output: [{ dir: 'dist', format: 'esm' }],
   plugins: [ts()],
-  external: [...Object.keys(dependencies)],
+  external: [...Object.keys(dependencies)]
 }
