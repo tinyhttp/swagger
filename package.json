@@ -33,9 +33,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint . --ext=js,mjs,ts,cjs",
-    "format": "prettier --check \"./**/*.{ts,js,mjs,cjs,md}\"",
-    "format:fix": "prettier --write \"./**/*.{ts,js,mjs,cjs,md}\"",
+    "lint": "eslint . --ignore-path .gitignore --ext=js,mjs,ts,cjs",
+    "format": "prettier --check --ignore-path .gitignore \"./**/*.{ts,js,mjs,cjs,md}\"",
+    "format:fix": "prettier --write --ignore-path .gitignore \"./**/*.{ts,js,mjs,cjs,md}\"",
     "coverage": "c8 --reporter=lcov --reporter=text pnpm test",
     "test": "node --experimental-loader esbuild-node-loader node_modules/uvu/bin.js tests"
   }
