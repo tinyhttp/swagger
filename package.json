@@ -1,12 +1,39 @@
 {
   "name": "swagger",
+  "version": "0.0.0",
+  "description": "Swagger integration for Tinyhttp",
+  "author": "massivefermion <massivefermion@protonmail.com>",
+  "keywords": ["swagger", "tinyhttp", "documentation"],
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     },
     "./package.json": "./package.json",
     "./": "./"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinyhttp/swagger"
+  },
+  "bugs": {
+    "url": "https://github.com/tinyhttp/swagger/issues"
+  },
+  "homepage": "https://github.com/tinyhttp/swagger#readme",
+  "directories": {
+    "lib": "./src",
+    "example": "./example",
+    "test": "./test"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.1",
@@ -20,6 +47,7 @@
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
     "prettier": "^2.3.2",
     "rollup": "^2.52.2",
     "rollup-plugin-copy": "^3.4.0",
@@ -35,6 +63,7 @@
     "format": "prettier --check --ignore-path .gitignore \"./**/*.{ts,js,mjs,cjs,md}\"",
     "format:fix": "prettier --write --ignore-path .gitignore \"./**/*.{ts,js,mjs,cjs,md}\"",
     "coverage": "c8 --reporter=lcov --reporter=text pnpm test",
-    "test": "node --experimental-loader esbuild-node-loader node_modules/uvu/bin.js tests"
+    "test": "node --experimental-loader esbuild-node-loader node_modules/uvu/bin.js tests",
+    "prepare": "husky install"
   }
 }
