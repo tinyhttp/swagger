@@ -1,7 +1,6 @@
 import { App } from '@tinyhttp/app'
 import { makeFetch } from 'supertest-fetch'
 import { addToDocs, generateDocs } from '../src/index'
-import type { body, parameters } from '../src/schema'
 
 export function initApp() {
   const app = new App()

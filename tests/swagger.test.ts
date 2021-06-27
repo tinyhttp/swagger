@@ -1,5 +1,6 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
+import { generateDocs } from '../src/index'
 import { initApp } from './helper'
 
 test('should be able to create a simple swagger file', async () => {
@@ -103,7 +104,13 @@ test('should be able to create a simple swagger file', async () => {
   }
 
   assert.is(response.status, 200)
-  assert.equal(body, resultSchema)
+  assert.is(JSON.stringify(body), JSON.stringify(resultSchema))
+})
+
+test('should return error for generateDocs without title', () => {
+  const { app } = initApp()
+
+  assert.throws(() => generateDocs(app, {}), 'you should provide generatDocs with a title')
 })
 
 test.run()
