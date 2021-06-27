@@ -38,6 +38,6 @@ app
 
 const docs = generateDocs(app, { title: 'example' })
 writeFileSync('docs.json', stringify(docs), {
-  encoding: 'utf-8',
+  encoding: 'utf-8'
 })
 // app.listen(3000)
