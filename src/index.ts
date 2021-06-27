@@ -1,6 +1,13 @@
+import type {
+  App,
+  Request,
+  Response,
+  NextFunction,
+  Middleware,
+} from '@tinyhttp/app'
+
+import type { Handler, AsyncHandler } from '@tinyhttp/router'
 import { createBodySub, createParameterSubs, outline } from './schema'
-import { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
-import { Handler, AsyncHandler } from '@tinyhttp/router'
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 

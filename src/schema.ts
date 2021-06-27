@@ -68,7 +68,7 @@ function bodyToOpenAPI(schema: body) {
       return true
     }
 
-    return !!!(
+    return !(
       schema[n] as { optional?: boolean; type: 'string' | 'number' | 'boolean' }
     )['optional']
   })
@@ -115,7 +115,7 @@ function schemaToOpenAPI(schema: schema, origin: origin): any[] {
 
     return {
       in: origin,
-      required: !!!details.optional,
+      required: !details.optional,
       name: n,
       schema: { type: details.type },
     }
