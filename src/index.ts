@@ -21,40 +21,35 @@ export function generateDocs(app: App, opts) {
   const version = opts.version || '0.1'
 
   const routes = app.middleware
-    .filter(mw => mw.type == 'route' && (mw.handler as SwaggerHandler).schema)
-    .map(route => ({
-      path: ((route as Middleware).path as string).replace(
-        /:(?<param>[A-Za-z0-9_]+)/g,
-        '{$<param>}'
-      ),
+    .filter((mw) => mw.type == 'route' && (mw.handler as SwaggerHandler).schema)
+    .map((route) => ({
+      path: ((route as Middleware).path as string).replace(/:(?<param>[A-Za-z0-9_]+)/g, '{$<param>}'),
       schema: (route.handler as SwaggerHandler).schema,
       tags: (route.handler as SwaggerHandler).tags,
-      method: route.method,
+      method: route.method
     }))
 
-  const uniquePathsSet = new Set(routes.map(r => r.path))
+  const uniquePathsSet = new Set(routes.map((r) => r.path))
   const uniquePaths = Array.from(uniquePathsSet.keys()) as string[]
 
   const docs = {}
-  uniquePaths.forEach(p => {
+  uniquePaths.forEach((p) => {
     docs[p] = {}
   })
 
-  uniquePaths.forEach(p => {
-    const current = routes.filter(route => route.path == p)
-    current.forEach(route => {
+  uniquePaths.forEach((p) => {
+    const current = routes.filter((route) => route.path == p)
+    current.forEach((route) => {
       const method = (route.method as string).toLowerCase()
       docs[p][method] = {
         tags: route.tags.length == 0 ? undefined : route.tags,
         parameters: createParameterSubs({
           headers: route.schema.headers,
           params: route.schema.params,
-          query: route.schema.query,
+          query: route.schema.query
         }),
-        requestBody: route.schema.body
-          ? createBodySub(route.schema.body)
-          : undefined,
-        responses: { 200: { description: 'successful' } },
+        requestBody: route.schema.body ? createBodySub(route.schema.body) : undefined,
+        responses: { 200: { description: 'successful' } }
       }
     })
   })
@@ -62,7 +57,7 @@ export function generateDocs(app: App, opts) {
   return {
     openapi: '3.0.3',
     info: { title: opts.title, version },
-    paths: docs,
+    paths: docs
   }
 }
 

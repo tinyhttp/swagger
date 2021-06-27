@@ -2,10 +2,7 @@ export type parameters = { headers?: schema; params?: schema; query?: schema }
 export type outline = parameters & { body?: body }
 export type origin = 'header' | 'query' | 'path'
 export type schema = {
-  [_: string]:
-    | 'number'
-    | 'string'
-    | { type: 'number' | 'string'; optional?: boolean; [_: string]: any }
+  [_: string]: 'number' | 'string' | { type: 'number' | 'string'; optional?: boolean; [_: string]: any }
 }
 export type body = {
   [_: string]:
@@ -25,22 +22,16 @@ export type body = {
       }
 }
 
-export type contentType =
-  | 'application/x-www-form-urlencoded'
-  | 'multipart/form-data'
-  | 'application/json'
+export type contentType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'application/json'
 
-export function createBodySub(
-  schema: body,
-  contentType: contentType = 'application/json'
-) {
+export function createBodySub(schema: body, contentType: contentType = 'application/json') {
   if (!schema || Object.keys(schema).length == 0) return {}
 
   const content: { [_: string]: { schema: any } } = {}
   content[contentType] = { schema: bodyToOpenAPI(schema) }
   return {
     required: true,
-    content,
+    content
   }
 }
 
@@ -63,26 +54,22 @@ export function createParameterSubs(parameters: parameters) {
 function bodyToOpenAPI(schema: body) {
   const names = Object.keys(schema)
 
-  const required = names.filter(n => {
+  const required = names.filter((n) => {
     if (typeof schema[n] == 'string') {
       return true
     }
 
-    return !!!(
-      schema[n] as { optional?: boolean; type: 'string' | 'number' | 'boolean' }
-    )['optional']
+    return !!!(schema[n] as { optional?: boolean; type: 'string' | 'number' | 'boolean' })['optional']
   })
 
   const properties = {}
-  names.forEach(n => {
+  names.forEach((n) => {
     if (typeof schema[n] == 'string') {
       properties[n] = { type: schema[n] as string }
-    } else if (
-      (schema[n] as { type: string; [_: string]: any })['type'] == 'array'
-    ) {
+    } else if ((schema[n] as { type: string; [_: string]: any })['type'] == 'array') {
       properties[n] = {
         type: 'array',
-        items: { type: (schema[n] as { items: string })['items'] },
+        items: { type: (schema[n] as { items: string })['items'] }
       }
     } else {
       properties[n] = { type: (schema[n] as { type: string })['type'] }
@@ -92,19 +79,19 @@ function bodyToOpenAPI(schema: body) {
   return {
     type: 'object',
     required,
-    properties,
+    properties
   }
 }
 
 function schemaToOpenAPI(schema: schema, origin: origin): any[] {
   const names = Object.keys(schema)
-  const subs = names.map(n => {
+  const subs = names.map((n) => {
     if (typeof schema[n] == 'string') {
       return {
         in: origin,
         required: true,
         name: n,
-        schema: { type: schema[n] },
+        schema: { type: schema[n] }
       }
     }
 
@@ -117,7 +104,7 @@ function schemaToOpenAPI(schema: schema, origin: origin): any[] {
       in: origin,
       required: !!!details.optional,
       name: n,
-      schema: { type: details.type },
+      schema: { type: details.type }
     }
   })
   return subs
