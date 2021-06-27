@@ -1,4 +1,5 @@
 export type parameters = { headers?: schema; params?: schema; query?: schema }
+export type outline = parameters & { body?: body }
 export type origin = 'header' | 'query' | 'path'
 export type schema = {
   [_: string]:

@@ -1,13 +1,10 @@
-import { createBodySub, createParameterSubs, body, parameters } from './schema'
+import { createBodySub, createParameterSubs, outline } from './schema'
 import { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
 import { Handler, AsyncHandler } from '@tinyhttp/router'
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 
-export function addToDocs(
-  schema: parameters & { body?: body },
-  tags: string[] = []
-) {
+export function addToDocs(schema: outline, tags: string[] = []) {
   const mw = async (_req: Request, _res: Response, next: NextFunction) => {
     next()
   }
@@ -25,17 +22,15 @@ export function generateDocs(app: App, opts) {
 
   const routes = app.middleware
     .filter(mw => mw.type == 'route' && (mw.handler as SwaggerHandler).schema)
-    .map(route => {
-      return {
-        path: ((route as Middleware).path as string).replace(
-          /:(?<param>[A-Za-z0-9_]+)/g,
-          '{$<param>}'
-        ),
-        schema: (route.handler as SwaggerHandler).schema,
-        tags: (route.handler as SwaggerHandler).tags,
-        method: route.method,
-      }
-    })
+    .map(route => ({
+      path: ((route as Middleware).path as string).replace(
+        /:(?<param>[A-Za-z0-9_]+)/g,
+        '{$<param>}'
+      ),
+      schema: (route.handler as SwaggerHandler).schema,
+      tags: (route.handler as SwaggerHandler).tags,
+      method: route.method,
+    }))
 
   const uniquePathsSet = new Set(routes.map(r => r.path))
   const uniquePaths = Array.from(uniquePathsSet.keys()) as string[]
