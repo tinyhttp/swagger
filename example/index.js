@@ -1,5 +1,5 @@
 import { App } from '@tinyhttp/app'
-import { addToDocs, generateDocs } from '../dist/index.cjs'
+import { addToDocs, generateDocs } from '../dist/index.js'
 import { writeFileSync } from 'fs'
 import stringify from 'json-format'
 
@@ -46,7 +46,8 @@ app
     }
   )
 
-writeFileSync('docs.json', stringify(generateDocs(app, { title: 'example' })), {
+const docs = generateDocs(app, { title: 'example' })
+writeFileSync('docs.json', stringify(docs), {
   encoding: 'utf-8',
 })
 // app.listen(3000)

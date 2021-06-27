@@ -70,3 +70,5 @@ export function generateDocs(app: App, opts) {
     paths: docs,
   }
 }
+
+export default { addToDocs, generateDocs }

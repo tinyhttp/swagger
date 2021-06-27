@@ -1,9 +1,9 @@
 {
   "name": "swagger",
+  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./package.json": "./package.json",
     "./": "./"

@@ -105,3 +105,4 @@ dist
 
 docs.json
 package-lock.json
+example/pnpm-lock.yaml
