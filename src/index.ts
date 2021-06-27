@@ -1,5 +1,4 @@
 import type { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
-
 import type { Handler, AsyncHandler } from '@tinyhttp/router'
 import { createBodySub, createParameterSubs, outline } from './schema'
 
