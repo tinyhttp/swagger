@@ -1,6 +1,8 @@
 import type { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
 import type { Handler, AsyncHandler } from '@tinyhttp/router'
 import { createBodySub, createParameterSubs, outline } from './schema'
+import { readFileSync } from 'fs'
+import { dirname, resolve } from 'path'
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 
@@ -61,4 +63,26 @@ export function generateDocs(app: App, opts) {
   }
 }
 
-export default { addToDocs, generateDocs }
+export function serveDocs(app: App, opts) {
+  if (!opts.title) {
+    throw Error('you should provide generatDocs with a title')
+  }
+
+  const version = opts.version || '0.1'
+  const prefix = opts.prefix || 'docs'
+
+  const docs = generateDocs(app, { title: opts.title, version })
+  const strDocs = JSON.stringify(docs)
+
+  const moduleURL = new URL(import.meta.url)
+  const __dirname = dirname(moduleURL.pathname)
+
+  const template = readFileSync(resolve(__dirname, 'index.html'), 'utf8')
+  const html = template.replace('`##docs##`', strDocs).replace('`##title##`', opts.title)
+
+  app.get('/' + prefix, (_req: Request, res: Response) => {
+    res.status(200).send(html)
+  })
+}
+
+export default { addToDocs, generateDocs, serveDocs }

@@ -22,6 +22,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
     "rollup": "^2.52.2",
+    "rollup-plugin-copy": "^3.4.0",
     "supertest-fetch": "^1.4.3",
     "ts-node": "^10.0.0",
     "tslib": "^2.3.0",
