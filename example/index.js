@@ -3,6 +3,8 @@ import { addToDocs, generateDocs } from '../dist/index.js'
 import { writeFileSync } from 'fs'
 import stringify from 'json-format'
 
+// In case the value for a given field is an object, @tinyhttp/swagger only uses the type, optional or items(in case type is array)
+// Other fields are ignored and are shown here only to imply that the same schema object can be used for validation by the fastest-validator package
 const schema = {
   id: { type: 'number', positive: true, integer: true },
   name: { type: 'string', min: 3, max: 255 },
