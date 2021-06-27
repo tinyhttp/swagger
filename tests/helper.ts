@@ -28,26 +28,32 @@ export function initApp() {
 
   app.post(
     '/users',
-    addToDocs({
-      headers: {
-        'csrf-token': 'string',
-        accept: {
-          type: 'string',
-          optional: true
+    addToDocs(
+      {
+        headers: {
+          'csrf-token': 'string',
+          accept: {
+            type: 'string',
+            optional: true
+          }
+        },
+        params: {
+          _csrf: {
+            type: 'string',
+            optional: true
+          }
+        },
+        body: {
+          name: 'string',
+          email: 'string',
+          phone: 'number'
         }
       },
-      params: {
-        _csrf: {
-          type: 'string',
-          optional: true
-        }
-      },
-      body: {
-        name: 'string',
-        email: 'string',
-        phone: 'number'
-      }
-    })
+      ['users']
+    ),
+    (_, res) => {
+      res.status(200).send('users post')
+    }
   )
 
   app.get('/docs', (_, res) => {
