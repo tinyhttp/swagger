@@ -60,13 +60,6 @@ export function initApp() {
     res.status(200).json(generateDocs(app, { title: 'sample app' }))
   })
 
-  serveDocs(
-    app,
-    {
-      title: 'sample app'
-    }
-  )
-
   const server = app.listen()
   const fetch = makeFetch(server)
 
