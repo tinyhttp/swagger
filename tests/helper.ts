@@ -1,6 +1,6 @@
 import { App } from '@tinyhttp/app'
 import { makeFetch } from 'supertest-fetch'
-import { addToDocs, generateDocs } from '../src/index'
+import { addToDocs, generateDocs, serveDocs } from '../src/index'
 
 export function initApp() {
   const app = new App()
@@ -59,6 +59,13 @@ export function initApp() {
   app.get('/docs', (_, res) => {
     res.status(200).json(generateDocs(app, { title: 'sample app' }))
   })
+
+  serveDocs(
+    app,
+    {
+      title: 'sample app'
+    }
+  )
 
   const server = app.listen()
   const fetch = makeFetch(server)

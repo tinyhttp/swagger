@@ -111,7 +111,7 @@ test('should be able to create a simple swagger file', async () => {
 test.skip('should return error for generateDocs without title', () => {
   const { app } = initApp()
 
-  assert.throws(() => generateDocs(app, {}), 'you should provide generatDocs with a title')
+  assert.throws(() => generateDocs(app, {title: ''}), 'you should provide generatDocs with a title')
 })
 
 test.run()

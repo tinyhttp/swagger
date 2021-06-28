@@ -1,6 +1,6 @@
 import type { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
 import type { Handler, AsyncHandler } from '@tinyhttp/router'
-import { createBodySub, createParameterSubs, outline } from './schema'
+import { createBodySub, createParameterSubs, docsOptions, outline } from './schema'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 
@@ -15,7 +15,7 @@ export function addToDocs(schema: outline, tags: string[] = []) {
   return mw
 }
 
-export function generateDocs(app: App, opts) {
+export function generateDocs(app: App, opts: docsOptions) {
   if (!opts.title) {
     throw Error('you should provide generatDocs with a title')
   }
@@ -65,7 +65,7 @@ export function generateDocs(app: App, opts) {
   }
 }
 
-export function serveDocs(app: App, opts) {
+export function serveDocs(app: App, opts: docsOptions) {
   if (!opts.title) {
     throw Error('you should provide generatDocs with a title')
   }
