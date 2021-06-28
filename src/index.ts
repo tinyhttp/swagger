@@ -77,7 +77,7 @@ export function serveDocs(app: App, opts) {
   const moduleURL = new URL(import.meta.url)
   const __dirname = dirname(moduleURL.pathname)
 
-  const template = readFileSync(resolve(__dirname, 'index.html'), 'utf8')
+  const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
   const html = template.replace('`##docs##`', strDocs).replace('`##title##`', opts.title)
 
   app.get('/' + prefix, (_req: Request, res: Response) => {
