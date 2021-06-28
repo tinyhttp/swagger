@@ -11,7 +11,13 @@ export default {
         {
           src: 'src/template.html',
           dest: 'dist/template.min.html',
-          minifierOptions: { collapseWhitespace: true, minifyCSS: true, minifyJS: true, minifyURLs: true }
+          minifierOptions: {
+            collapseWhitespace: true,
+            minifyCSS: true,
+            minifyJS: true,
+            minifyURLs: true,
+            minifyHTML: true
+          }
         }
       ]
     })

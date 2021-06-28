@@ -21,6 +21,7 @@ export function generateDocs(app: App, opts) {
   }
 
   const version = opts.version || '0.1'
+  const servers = opts.servers || []
 
   const routes = app.middleware
     .filter((mw) => mw.type == 'route' && (mw.handler as SwaggerHandler).schema)
@@ -58,7 +59,8 @@ export function generateDocs(app: App, opts) {
 
   return {
     openapi: '3.0.3',
-    info: { title: opts.title, version },
+    info: { title: opts.title, version, description: opts.description },
+    servers: servers.length > 0 ? opts.servers.map((url) => ({ url })) : undefined,
     paths: docs
   }
 }
@@ -71,7 +73,12 @@ export function serveDocs(app: App, opts) {
   const version = opts.version || '0.1'
   const prefix = opts.prefix || 'docs'
 
-  const docs = generateDocs(app, { title: opts.title, version })
+  const docs = generateDocs(app, {
+    title: opts.title,
+    version,
+    servers: opts.servers,
+    description: opts.description
+  })
   const strDocs = JSON.stringify(docs)
 
   const moduleURL = new URL(import.meta.url)

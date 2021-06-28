@@ -36,6 +36,12 @@ app
     res.status(200).send('done')
   })
 
-// default for version is 0.1 and for prefix is docs but title is required
-serveDocs(app, { title: 'example', version: '1.0', prefix: 'api-docs' })
+// Only title is required. if servers and description are not provided, nothing is shown. version and prefix have default values of 0.1 and docs.
+serveDocs(app, {
+  title: 'example',
+  version: '1.0',
+  prefix: 'api-docs',
+  description: 'this is an example for @tinyhttp/swagger',
+  servers: ['www.host1.com/api/v1', 'api.host2.org/v1']
+})
 app.listen(3000)
