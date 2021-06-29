@@ -17,7 +17,7 @@ export function addToDocs(schema: outline, tags: string[] = []) {
 
 export function generateDocs(app: App, opts: docsOptions) {
   if (!opts.title) {
-    throw Error('you should provide generatDocs with a title')
+    throw Error('you should provide generateDocs with a title')
   }
 
   const version = opts.version || '0.1'
@@ -67,7 +67,7 @@ export function generateDocs(app: App, opts: docsOptions) {
 
 export function serveDocs(app: App, opts: docsOptions) {
   if (!opts.title) {
-    throw Error('you should provide generateDocs with a title')
+    throw Error('you should provide serveDocs with a title')
   }
 
   const version = opts.version || '0.1'
