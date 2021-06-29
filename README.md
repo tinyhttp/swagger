@@ -7,7 +7,7 @@
 </div>
 <br />
 
-[Swagger](https://swagger.io/) integration for tinyhttp. This library allows you to easily generate documentation for your [tinyhttp](https://github.com/tinyhttp/tinyhttp) API.
+[Swagger](https://swagger.io/) integration for [tinyhttp](https://github.com/tinyhttp/tinyhttp). This library allows you to easily generate documentation for your API.
 
 ## Install
 
