@@ -65,6 +65,6 @@ serveDocs(app, {
 app.listen(3000)
 ```
 
-[npm-badge]: https://img.shields.io/npm/v/tinyhttp/swagger?style=for-the-badge&color=50A237&label=&logo=npm
+[npm-badge]: https://img.shields.io/npm/v/@tinyhttp/swagger?style=for-the-badge&color=50A237&label=&logo=npm
 [npm-url]: https://npmjs.com/package/@tinyhttp/swagger
 [dl-badge]: https://img.shields.io/npm/dt/@tinyhttp/swagger?style=for-the-badge&color=50A237
