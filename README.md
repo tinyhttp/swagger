@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.svg" width="200px" alt="@tinyhttp/swagger" />
+  <img src="https://raw.githubusercontent.com/tinyhttp/swagger/master/logo.svg" width="200px" alt="@tinyhttp/swagger" />
 </div>
 <br />
 
