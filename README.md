@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/tinyhttp/swagger/master/logo.svg" width="200px" alt="@tinyhttp/swagger" />
+<br />
+  <img src="https://raw.githubusercontent.com/tinyhttp/swagger/master/logo.svg" width="200px" alt="@tinyhttp/swagger" /><br /><br />
 
-[![NPM][npm-badge]][npm-url]
+[![NPM][npm-badge]][npm-url] [![NPM][dl-badge]][npm-url]
 
 </div>
 <br />
@@ -64,5 +65,6 @@ serveDocs(app, {
 app.listen(3000)
 ```
 
-[npm-badge]: https://img.shields.io/npm/v/tinyhttp/swagger?style=for-the-badge&color=50A237
+[npm-badge]: https://img.shields.io/npm/v/tinyhttp/swagger?style=for-the-badge&color=50A237&label=&logo=npm
 [npm-url]: https://npmjs.com/package/@tinyhttp/swagger
+[dl-badge]: https://img.shields.io/npm/dt/@tinyhttp/swagger?style=for-the-badge&color=50A237
