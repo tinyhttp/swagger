@@ -70,5 +70,5 @@ app.listen(3000)
 [dl-badge]: https://img.shields.io/npm/dt/@tinyhttp/swagger?style=for-the-badge&color=50A237
 [actions-img]: https://img.shields.io/github/workflow/status/tinyhttp/swagger/CI?style=for-the-badge&logo=github&label=&color=50A237
 [github-actions]: https://github.com/tinyhttp/swagger/actions
-[cov-img]: https://img.shields.io/coveralls/github/tinyhttp/swagger?style=for-the-badge&color=50A237
+[cov-img]: https://img.shields.io/coveralls/github/tinyhttp/swagger?style=for-the-badge&color=50A237&a
 [cov-url]: https://coveralls.io/github/tinyhttp/swagger
