@@ -2,7 +2,7 @@
 <br />
   <img src="https://raw.githubusercontent.com/tinyhttp/swagger/master/logo.svg" width="200px" alt="@tinyhttp/swagger" /><br /><br />
 
-[![NPM][npm-badge]][npm-url] [![NPM][dl-badge]][npm-url]
+[![NPM][npm-badge]][npm-url] [![NPM][dl-badge]][npm-url] [![GitHub Workflow Status][actions-img]][github-actions] [![Coverage][cov-img]][cov-url]
 
 </div>
 <br />
@@ -68,3 +68,7 @@ app.listen(3000)
 [npm-badge]: https://img.shields.io/npm/v/@tinyhttp/swagger?style=for-the-badge&color=50A237&label=&logo=npm
 [npm-url]: https://npmjs.com/package/@tinyhttp/swagger
 [dl-badge]: https://img.shields.io/npm/dt/@tinyhttp/swagger?style=for-the-badge&color=50A237
+[actions-img]: https://img.shields.io/github/workflow/status/tinyhttp/swagger/CI?style=for-the-badge&logo=github&label=&color=50A237
+[github-actions]: https://github.com/tinyhttp/swagger/actions
+[cov-img]: https://img.shields.io/coveralls/github/tinyhttp/swagger?style=for-the-badge&color=50A237
+[cov-url]: https://coveralls.io/github/tinyhttp/swagger
