@@ -91,5 +91,3 @@ export function serveDocs(app: App, opts: docsOptions) {
     res.status(200).send(html)
   })
 }
-
-export default { addToDocs, generateDocs, serveDocs }
