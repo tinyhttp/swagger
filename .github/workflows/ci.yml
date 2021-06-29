@@ -26,12 +26,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: setup caching
-              uses: actions/cache@v2
-              with:
-                path: ${{ env.PNPM_CACHE_FOLDER }}
-                key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-                restore-keys: |
-                  ${{ runner.os }}-pnpm-
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.PNPM_CACHE_FOLDER }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
 
       - uses: actions/setup-node@v2-beta
         with:
