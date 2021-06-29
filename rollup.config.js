@@ -10,7 +10,7 @@ export default {
       targets: [
         {
           src: 'src/template.html',
-          dest: 'dist/template.min.html',
+          dest: 'dist/template.html',
           minifierOptions: {
             collapseWhitespace: true,
             minifyCSS: true,

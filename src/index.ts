@@ -67,7 +67,7 @@ export function generateDocs(app: App, opts: docsOptions) {
 
 export function serveDocs(app: App, opts: docsOptions) {
   if (!opts.title) {
-    throw Error('you should provide generatDocs with a title')
+    throw Error('you should provide generateDocs with a title')
   }
 
   const version = opts.version || '0.1'
@@ -84,7 +84,7 @@ export function serveDocs(app: App, opts: docsOptions) {
   const moduleURL = new URL(import.meta.url)
   const __dirname = dirname(moduleURL.pathname)
 
-  const template = readFileSync(resolve(__dirname, 'template.min.html'), 'utf8')
+  const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
   const html = template.replace('"##docs##"', strDocs).replace('"##title##"', opts.title)
 
   app.get('/' + prefix, (_req: Request, res: Response) => {
