@@ -17,7 +17,7 @@ pnpm i @tinyhttp/swagger
 import { App } from '@tinyhttp/app'
 import { addToDocs, serveDocs } from '@tinyhttp/swagger'
 
-// In case the value for a given field is an object, @tinyhttp/swagger only uses the type, optional or items(in case type is array)
+// In case the value for a given field is an object, @tinyhttp/swagger only uses the type, optional or items (in case type is array)
 // Other fields are ignored and are shown here only to imply that the same schema object can be used for validation by the fastest-validator package
 const schema = {
   id: { type: 'number', positive: true, integer: true },
