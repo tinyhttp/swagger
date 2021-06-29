@@ -46,7 +46,14 @@ export function initApp() {
         body: {
           name: 'string',
           email: 'string',
-          phone: 'number'
+          phone: {
+            type: 'number',
+            optional: true
+          },
+          score: {
+            type: 'array',
+            items: 'number'
+          }
         }
       },
       ['users']
@@ -56,9 +63,11 @@ export function initApp() {
     }
   )
 
-  app.get('/docs', (_, res) => {
+  app.get('/json', (_, res) => {
     res.status(200).json(generateDocs(app, { title: 'sample app' }))
   })
+
+  serveDocs(app, { title: 'sample app' })
 
   const server = app.listen()
   const fetch = makeFetch(server)
