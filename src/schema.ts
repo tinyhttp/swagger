@@ -24,7 +24,7 @@ export type body = {
 
 export type contentType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'application/json'
 
-export interface docsOptions {
+export type docsOptions = {
   title: string
   version?: string
   servers?: string[]
