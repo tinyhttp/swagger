@@ -24,13 +24,14 @@ export type body = {
 
 export type contentType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'application/json'
 
-export type docsOptions = {
+export type generateOptions = {
   title: string
   version?: string
   servers?: string[]
   description?: string
-  prefix?: string
 }
+
+export type serveOptions = generateOptions & { prefix?: string }
 
 export function createBodySub(schema: body, contentType: contentType = 'application/json') {
   if (!schema || Object.keys(schema).length == 0) return {}
