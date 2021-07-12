@@ -33,7 +33,8 @@
     "test:coverage": "c8 --include=src pnpm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov",
     "lint": "eslint \"./**/*.ts\"",
-    "format": "prettier --write \"./**/*.ts\"",
+    "format": "prettier --check \"./**/*.ts\"",
+    "format:fix": "prettier --write \"./**/*.ts\"",
     "prepare": "husky install"
   },
   "devDependencies": {

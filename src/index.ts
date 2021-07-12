@@ -3,7 +3,7 @@ import type { Handler, AsyncHandler } from '@tinyhttp/router'
 import { createBodySub, createParameterSubs, generateOptions, serveOptions, outline } from './schema'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 
