@@ -3,6 +3,7 @@ import type { Handler, AsyncHandler } from '@tinyhttp/router'
 import { createBodySub, createParameterSubs, generateOptions, serveOptions, outline } from './schema'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url';
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 
@@ -81,8 +82,8 @@ export function serveDocs(app: App, opts: serveOptions) {
   })
   const strDocs = JSON.stringify(docs)
 
-  const moduleURL = new URL(import.meta.url)
-  const __dirname = dirname(moduleURL.pathname)
+  const modulePath = fileURLToPath(import.meta.url)
+  const __dirname = dirname(modulePath)
 
   const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
   const html = template.replace('"##docs##"', strDocs).replace('"##title##"', opts.title)
