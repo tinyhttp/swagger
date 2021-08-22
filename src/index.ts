@@ -1,5 +1,4 @@
-import type { App, Request, Response, NextFunction, Middleware } from '@tinyhttp/app'
-import type { Handler, AsyncHandler } from '@tinyhttp/router'
+import type { App, Request, Response, NextFunction, Middleware, Handler, AsyncHandler } from '@tinyhttp/app'
 import { createBodySub, createParameterSubs, generateOptions, serveOptions, outline } from './schema'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
