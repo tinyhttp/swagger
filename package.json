@@ -1,6 +1,6 @@
 {
   "name": "@tinyhttp/swagger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Swagger integration for tinyhttp",
   "author": "massivefermion <massivefermion@protonmail.com>",
   "keywords": [
