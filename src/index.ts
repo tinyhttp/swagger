@@ -11,7 +11,7 @@ export function addToDocs(schema: outline, tags: string[] = []) {
     next()
   }
   mw.schema = schema
-  mw.tags = tags
+  mw.tags = tags || []
   return mw
 }
 
@@ -45,22 +45,25 @@ export function generateDocs(app: App, opts: generateOptions) {
     current.forEach((route) => {
       const method = (route.method as string).toLowerCase()
       docs[p][method] = {
-        tags: route.tags.length == 0 ? undefined : route.tags,
+        tags: route.tags.length == 0 ? [] : route.tags,
         parameters: createParameterSubs({
           headers: route.schema.headers,
           params: route.schema.params,
           query: route.schema.query
         }),
-        requestBody: route.schema.body ? createBodySub(route.schema.body) : undefined,
         responses: { 200: { description: 'successful' } }
+      }
+
+      if (route.schema.body) {
+        docs[p][method].requestBody = createBodySub(route.schema.body)
       }
     })
   })
 
   return {
     openapi: '3.0.3',
-    info: { title: opts.title, version, description: opts.description },
-    servers: servers.length > 0 ? opts.servers.map((url) => ({ url })) : undefined,
+    info: { title: opts.title, version, description: opts.description || '' },
+    servers: servers.length > 0 ? opts.servers.map((url) => ({ url })) : [],
     paths: docs
   }
 }
@@ -76,8 +79,8 @@ export function serveDocs(app: App, opts: serveOptions) {
   const docs = generateDocs(app, {
     title: opts.title,
     version,
-    servers: opts.servers,
-    description: opts.description
+    servers: opts.servers || [],
+    description: opts.description || ''
   })
   const strDocs = JSON.stringify(docs)
 
