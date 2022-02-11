@@ -1,8 +1,15 @@
-import type { App, Request, Response, NextFunction, Middleware, Handler, AsyncHandler } from '@tinyhttp/app'
-import { createBodySub, createParameterSubs, generateOptions, serveOptions, outline } from './schema'
+import type { App, AsyncHandler, Handler, Middleware, NextFunction, Request, Response } from '@tinyhttp/app'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
+import {
+  createBodySub,
+  createParameterSubs,
+  createResponsesSub,
+  generateOptions,
+  outline,
+  serveOptions
+} from './schema'
 
 type SwaggerHandler = (Handler | AsyncHandler) & { schema: any; tags: any }
 
@@ -50,12 +57,16 @@ export function generateDocs(app: App, opts: generateOptions) {
           headers: route.schema.headers,
           params: route.schema.params,
           query: route.schema.query
-        }),
-        responses: { 200: { description: 'successful' } }
+        })
       }
 
       if (route.schema.body) {
         docs[p][method].requestBody = createBodySub(route.schema.body)
+      }
+      if (route.schema.responses) {
+        docs[p][method].responses = createResponsesSub(route.schema.responses)
+      } else {
+        docs[p][method].responses = { 200: { description: 'successful' } }
       }
     })
   })

@@ -1,5 +1,7 @@
 export type parameters = { headers?: schema; params?: schema; query?: schema }
-export type outline = parameters & { body?: body }
+export type response = { description?: string; headers?: schema; schema: body }
+export type responses = { [_: number]: response }
+export type outline = parameters & { body?: body } & { responses?: responses }
 export type origin = 'header' | 'query' | 'path'
 export type schema = {
   [_: string]: 'number' | 'string' | { type: 'number' | 'string'; optional?: boolean; [_: string]: any }
@@ -66,6 +68,28 @@ export function createParameterSubs(parameters: parameters) {
   if (headers) headerSubs = schemaToOpenAPI(headers, 'header')
 
   return [...querySubs, ...paramSubs, ...headerSubs]
+}
+
+export function createResponsesSub(schema: responses, contentType: contentType = 'application/json') {
+  if (!schema || Object.keys(schema).length == 0) return {}
+
+  const output: { [_: number]: any } = {}
+  for (const strCode in schema) {
+    const code = parseInt(strCode)
+    if (isNaN(code) || code >= 600 || code < 100) throw Error(`${strCode} is not a valid status code`)
+
+    const headersList = schema[code].headers ? schemaToOpenAPI(schema[code].headers, 'header') : []
+    const headers = Object.fromEntries(headersList.map(({ name, schema }) => [name, schema]))
+    output[code] = {
+      description: schema[code].description || '',
+      headers,
+      content: {}
+    }
+    output[code]['content'][contentType] = {}
+    output[code]['content'][contentType]['schema'] = bodyToOpenAPI(schema[code].schema)
+  }
+
+  return output
 }
 
 function bodyToOpenAPI(schema: body) {
