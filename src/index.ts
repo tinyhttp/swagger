@@ -94,7 +94,6 @@ export function serveDocs(app: App, opts: serveOptions) {
     description: opts.description || ''
   })
   const strDocs = JSON.stringify(docs)
-
   const modulePath = fileURLToPath(import.meta.url)
   const __dirname = dirname(modulePath)
 

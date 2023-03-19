@@ -14,6 +14,7 @@ test('should be able to create a simple swagger file', async () => {
     openapi: '3.0.3',
     info: {
       title: 'sample app',
+      description: '',
       version: '0.1'
     },
     paths: {
@@ -109,7 +110,8 @@ test('should be able to create a simple swagger file', async () => {
           tags: ['users']
         }
       }
-    }
+    },
+    servers: []
   }
 
   assert.is(response.status, 200)
@@ -122,61 +124,54 @@ test('should return a html page of swagger docs', async () => {
   const body = await response.text()
   const htmlPage = `<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>sample app</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.0/swagger-ui.css" />
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" />
     <style>
-        html {
-            box-sizing: border-box;
-            overflow: -moz-scrollbars-vertical;
-            overflow-y: scroll;
-        }
+      html {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
 
-        *,
-        *:before,
-        *:after {
-            box-sizing: inherit;
-        }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
 
-        body {
-            margin: 0;
-            background: #fafafa;
-        }
+      body {
+        margin: 0;
+        background: #fafafa;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <div id="swagger-ui"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.0/swagger-ui-bundle.js" charset="UTF-8"> </script>
-    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.0/swagger-ui-standalone-preset.js"
-        charset="UTF-8"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.0/swagger-ui-bundle.js" charset="UTF-8"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.0/swagger-ui-standalone-preset.js"
+      charset="UTF-8"
+    ></script>
     <script>
-        window.onload = function () {
-            const ui = SwaggerUIBundle({
-                spec: {"openapi":"3.0.3","info":{"title":"sample app","version":"0.1"},"paths":{"/users/{id}":{"get":{"tags":["users"],"parameters":[{"in":"path","required":false,"name":"id","schema":{"type":"string"}},{"in":"header","required":true,"name":"authorization","schema":{"type":"string"}}],"responses":{"200":{"description":"successful"}}}},"/users":{"post":{"tags":["users"],"parameters":[{"in":"path","required":false,"name":"_csrf","schema":{"type":"string"}},{"in":"header","required":true,"name":"csrf-token","schema":{"type":"string"}},{"in":"header","required":false,"name":"accept","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["name","email","score"],"properties":{"name":{"type":"string"},"email":{"type":"string"},"phone":{"type":"number"},"score":{"type":"array","items":{"type":"number"}}}}}}},"responses":{"200":{"description":"successful"}}}}}},
-                dom_id: '#swagger-ui',
-                deepLinking: true,
-                presets: [
-                    SwaggerUIBundle.presets.apis,
-                    SwaggerUIStandalonePreset
-                ],
-                plugins: [
-                    SwaggerUIBundle.plugins.DownloadUrl
-                ],
-                layout: "StandaloneLayout"
-            });
+      window.onload = function () {
+        const ui = SwaggerUIBundle({
+          spec: '##docs##',
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+          plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+          layout: 'StandaloneLayout'
+        })
 
-            window.ui = ui;
-        };
+        window.ui = ui
+      }
     </script>
-</body>
-
-</html>`
-
+  </body>
+</html>
+`
   assert.is(response.status, 200)
   assert.is(response.headers.get('content-type'), 'text/html; charset=utf-8')
   assert.fixture(body, htmlPage)
