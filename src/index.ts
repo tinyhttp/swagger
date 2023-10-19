@@ -98,7 +98,7 @@ export function serveDocs(app: App, opts: serveOptions) {
   const __dirname = dirname(modulePath)
 
   const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
-  const html = template.replace('"##docs##"', strDocs).replace('"##title##"', opts.title)
+  const html = template.replace("'##docs##'", strDocs).replace('"##title##"', opts.title)
 
   app.get('/' + prefix, (_req: Request, res: Response) => {
     res.status(200).send(html)
