@@ -5,6 +5,8 @@ import * as assert from 'uvu/assert'
 import { addToDocs, generateDocs, serveDocs } from '../src/index'
 import { initApp } from './helper'
 
+setTimeout(() => process.exit(0), 1024)
+
 test('should be able to create a simple swagger file', async () => {
   const { fetch } = initApp()
   const response = await fetch('/json')
@@ -158,7 +160,7 @@ test('should return a html page of swagger docs', async () => {
     <script>
       window.onload = function () {
         const ui = SwaggerUIBundle({
-          spec: '##docs##',
+          spec: {"openapi":"3.0.3","info":{"title":"sample app","version":"0.1","description":""},"servers":[],"paths":{"/users/{id}":{"get":{"tags":["users"],"parameters":[{"in":"path","required":false,"name":"id","schema":{"type":"string"}},{"in":"header","required":true,"name":"authorization","schema":{"type":"string"}}],"responses":{"200":{"description":"successful"}}}},"/users":{"post":{"tags":["users"],"parameters":[{"in":"path","required":false,"name":"_csrf","schema":{"type":"string"}},{"in":"header","required":true,"name":"csrf-token","schema":{"type":"string"}},{"in":"header","required":false,"name":"accept","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["name","email","score"],"properties":{"name":{"type":"string"},"email":{"type":"string"},"phone":{"type":"number"},"score":{"type":"array","items":{"type":"number"}}}}}}},"responses":{"200":{"description":"successful"}}}}}},
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
